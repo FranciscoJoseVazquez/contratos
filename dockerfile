@@ -10,18 +10,15 @@ WORKDIR /var/www/html
 # Exponer el puerto 80
 EXPOSE 80
 
-# Configurar permisos adecuados
-RUN chown -R www-data:www-data /var/www/html && \
+# Crear las carpetas "sinfirmar" y "firmados" y asignar permisos adecuados
+RUN mkdir -p /var/www/html/sinfirmar /var/www/html/firmados && \
+    chmod -R 777 /var/www/html/sinfirmar /var/www/html/firmados && \
     chmod -R 777 /var/www/html
-
-# Crear las carpetas "sinfirmar" y "firmados"
-RUN mkdir /var/www/html/sinfirmar && mkdir /var/www/html/firmados && \
-    chmod -R 777 /var/www/html/sinfirmar /var/www/html/firmados
 
 # Crear archivo php.ini
 RUN cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini
 
-# Cambiar php.ini
+# Cambiar configuraciones en php.ini
 RUN sed -E -i 's/(;?)(post_max_size[[:space:]]=[[:space:]])50+M/\\2328M/g' /usr/local/etc/php/php.ini && \
     sed -E -i 's/(;?)(upload_max_filesize[[:space:]]=[[:space:]])50+M/\\2328M/g' /usr/local/etc/php/php.ini
 
