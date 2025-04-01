@@ -12,10 +12,11 @@ EXPOSE 80
 
 # Configurar permisos adecuados
 RUN chown -R www-data:www-data /var/www/html && \
-    chmod -R 755 /var/www/html
+    chmod -R 777 /var/www/html
 
 # Crear las carpetas "sinfirmar" y "firmados"
-RUN mkdir /var/www/html/sinfirmar && mkdir /var/www/html/firmados
+RUN mkdir /var/www/html/sinfirmar && mkdir /var/www/html/firmados && \
+    chmod -R 777 /var/www/html/sinfirmar /var/www/html/firmados
 
 # Crear archivo php.ini
 RUN cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini
