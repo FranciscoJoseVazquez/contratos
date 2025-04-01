@@ -11,7 +11,7 @@ WORKDIR /var/www/html
 EXPOSE 80
 
 # Permisos
-RUN chmod -R /var/www/html
+RUN chmod -R 777 /var/www/html
 
 # Crear las carpetas "sinfirmar" y "firmados" y asignar permisos
 RUN mkdir -p /var/www/html/sinfirmar /var/www/html/firmados && \
