@@ -15,7 +15,7 @@ RUN chmod -R 777 /var/www/html
 
 # Crear las carpetas necesarias y asignar permisos
 RUN mkdir -p /var/www/html/sinfirmar /var/www/html/firmados && \
-    chmod -R 777 /var/www/html
+    chmod -R 777 /var/www/html/*
 
 # Crear archivo php.ini
 RUN cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini
