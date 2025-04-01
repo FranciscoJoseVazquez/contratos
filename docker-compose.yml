@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  apache_php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - ./codigo:/var/www/html
+    depends_on:
+      - mysql
+    networks:
+      - backend
+
+  mysql:
+    image: mysql:5.7
+    env_file:
+      - ./variables.env  # Cargar las variables desde el archivo variables.env
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./bd.sql:/docker-entrypoint-initdb.d/bd.sql  # Montamos el archivo bd.sql en el contenedor
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge

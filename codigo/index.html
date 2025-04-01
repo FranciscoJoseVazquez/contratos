@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generación de Contrato</title>
+  <style>
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 20px;
+        text-align: center;
+    }
+
+    img {
+        display: block;
+        margin: 0 auto;
+        max-width: 200px;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 30px;
+        margin-top: 10px;
+    }
+
+    form {
+        max-width: 600px; 
+        margin: 20px auto;
+        padding: 20px; 
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        text-align: left;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        font-size: 16px; 
+    }
+
+    input {
+        width: 95%;
+        padding: 12px; 
+        margin-bottom: 15px; 
+        border: 1px solid #999;
+        border-radius: 6px;
+        font-size: 16px; 
+    }
+
+    button {
+        display: block;
+        width: 100%;
+        padding: 14px; 
+        background-color: #b31e1c;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 18px; 
+        font-weight: bold;
+    }
+
+    button:hover {
+        background-color: #8a1614;
+    }
+
+    .pdf-content {
+        display: none;
+        width: 90%;
+        margin: 20px auto;
+        padding: 30px;
+        background-color: #ffffff;
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 50px;
+        font-weight: bold;
+        background-color: #d3d3d3;
+        padding: 20px;
+    }
+
+    p {
+        text-align: justify;
+        margin-bottom: 20px;
+        font-size: 35px;
+    }
+
+    .bold { font-weight: bold; font-size: 35px; }
+    .black { color: black; font-weight: bold; font-size: 35px; }
+
+    .inline {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .align-right {
+        text-align: right;
+    }
+
+    .signature-section {
+        margin-top: 200px;
+    }
+    .thick-line {
+        border: none;
+        height: 4px; 
+        background-color: black; 
+        width: 100%; 
+        margin-top: -10px;
+    }
+</style>
+
+</head>
+<body>
+    <img src="atalaya.jpg" alt="">
+    <h1>Formulario de creacion de contratos</h1>
+
+  <form id="contractForm">
+    <label>Fecha del Contrato: <input type="date" name="fecha" required></label>
+    <label>Denominación Social: <input type="text" name="denominacion" required></label>
+    <label>Domicilio Fiscal: <input type="text" name="domicilio" required></label>
+    <label>Identificación Fiscal: <input type="text" name="cif" required></label>
+    <label>Datos del Apoderado: <input type="text" name="apoderado" required></label>
+    <label>Lugar de la Notaría: <input type="text" name="notaria" required></label>
+    <label>Notario: <input type="text" name="notario" required></label>
+    <label>Número de Protocolo: <input type="text" name="protocolo" required></label>
+    <button type="button" id="generateButton">Crear contrato</button>
+  </form>
+
+  <div id="pdfContent" class="pdf-content">
+    <h2>CONTRATO MARCO PARA LA PRESTACIÓN DE SERVICIOS DENTRO DEL PROYECTO MINERO RIOTINTO</h2>
+    <p style="text-align: right;">
+        <span id="pdfFecha">En Minas De Riotinto, a </span>
+    </p>
+    <p class="bold">R E U N I D O S</p>
+    <p>De una parte, <span class="bold">ATALAYA RIOTINTO MINERA, S.L.U.</span> (en adelante, <span class="bold">“ATALAYA”</span>), domiciliada a los efectos de este contrato en La Dehesa S/N, 21660, Minas de Riotinto, Huelva.</p>
+    <p>Y de otra parte, <span class="black" id="pdfDenominacion"></span> (en adelante, el <span class="bold">“CONTRATISTA”</span>), domiciliada en <span class="black" id="pdfDomicilio"></span> con CIF: <span class="black" id="pdfCIF"></span>, representada en este acto por <span class="black" id="pdfApoderado"></span>, con facultades bastantes para suscribir este contrato conforme al notario de <span class="black" id="pdfNotaria"></span> D. <span class="black" id="pdfNotario"></span> en <span class="black" id="pdfFecha2"></span> bajo el <span class="black" id="pdfProtocolo"></span> de su protocolo.</p>
+    <p class="bold">E X P O N E N</p>
+    <p>I.- ATALAYA es desde el año 2007 la empresa titular de los terrenos, concesiones e instalaciones mineras del Proyecto Minero de Riotinto (“PRT” en adelante) sito en los términos Municipales de Minas de Riotinto, Nerva y El Campillo (Huelva).</p>
+    <p>Las Partes, con expresa renuncia a cualquier otro fuero que pudiera corresponderles, someten cuantas discrepancias puedan surgir en la interpretación y desarrollo de este contrato a la jurisdicción de los Juzgados y Tribunales de Huelva.</p>
+    <p>***</p>
+    <p>Y en prueba de conformidad con cuanto antecede, las Partes, en la representación que ostentan, firman el presente documento, en el lugar y fecha al comienzo indicados.</p>
+    <div class="inline">
+        <div>
+            <p class="bold">REVISADO DPTO. DE COMPRAS</p>
+            <hr class="thick-line">
+        </div>
+        <div>
+            <p class="bold">ATALAYA RIOTINTO MINERA, S.L.U.  <span class="black" id="pdfDenominacion2"></span></p>
+            <hr class="thick-line">
+        </div>
+    </div>
+    <div class="signature-section">
+        <p>P.P. Atalaya     P.P.D. <span class="black" id="pdfApoderado2"></span></p>
+    </div>
+</div>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const { jsPDF } = window.jspdf;
+
+    const generatePDF = () => {
+        const form = document.getElementById('contractForm');
+
+        if (!form.checkValidity()) {
+        alert("¡Por favor, complete todos los campos!");
+        return;
+        }
+
+        const data = new FormData(form);
+        document.getElementById('pdfFecha').textContent += data.get('fecha');
+        document.getElementById('pdfFecha2').textContent += data.get('fecha');
+        document.getElementById('pdfDenominacion').textContent = data.get('denominacion');
+        document.getElementById('pdfDenominacion2').textContent = data.get('denominacion');
+        document.getElementById('pdfDomicilio').textContent = data.get('domicilio');
+        document.getElementById('pdfCIF').textContent = data.get('cif');
+        document.getElementById('pdfApoderado').textContent = data.get('apoderado');
+        document.getElementById('pdfApoderado2').textContent = data.get('apoderado');
+        document.getElementById('pdfNotaria').textContent = data.get('notaria');
+        document.getElementById('pdfNotario').textContent = data.get('notario');
+        document.getElementById('pdfProtocolo').textContent = data.get('protocolo');
+
+        const pdfContent = document.getElementById('pdfContent');
+        pdfContent.style.display = "block";
+
+        html2canvas(pdfContent, { scale: 2 }).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdfDoc = new jsPDF();
+        pdfDoc.addImage(imgData, 'PNG', 10, 10, 190, canvas.height * 190 / canvas.width);
+
+        const pdfBlob = pdfDoc.output('blob');
+        const formData = new FormData();
+        formData.append("pdf", pdfBlob, "Contrato.pdf");
+
+        fetch("guardar_pdf.php", {
+            method: "POST",
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            localStorage.setItem("ruta", data);
+            window.location.href = "firma.php"; 
+        })
+        .catch(error => console.error("Error al guardar el PDF:", error));
+
+        pdfContent.style.display = "none"; 
+        });
+    };
+
+    document.getElementById('generateButton').addEventListener('click', generatePDF);
+    });
+
+  </script>
+
+</body>
+</html> 
