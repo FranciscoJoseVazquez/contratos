@@ -17,7 +17,7 @@ services:
   mysql:
     image: mysql:5.7
     env_file:
-      - ./variables.env  # Cargar las variables desde el archivo variables.env
+      - .env  # Cargar las variables desde el archivo .env
     ports:
       - "3306:3306"
     volumes:
