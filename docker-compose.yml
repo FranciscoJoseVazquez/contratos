@@ -9,6 +9,8 @@ services:
       - "8080:80"
     volumes:
       - ./codigo:/var/www/html
+      - ./codigo/sinfirmar:/var/www/html/sinfirmar
+      - ./codigo/firmados:/var/www/html/firmados
     depends_on:
       - mysql
     networks:
