@@ -10,7 +10,10 @@ WORKDIR /var/www/html
 # Exponer el puerto 80
 EXPOSE 80
 
-# Crear las carpetas "sinfirmar" y "firmados" y asignar permisos adecuados
+# Permisos
+RUN chmod -R /var/www/html
+
+# Crear las carpetas "sinfirmar" y "firmados" y asignar permisos
 RUN mkdir -p /var/www/html/sinfirmar /var/www/html/firmados && \
     chmod -R 777 /var/www/html/sinfirmar /var/www/html/firmados && \
     chmod -R 777 /var/www/html
