@@ -14,7 +14,7 @@ EXPOSE 80
 RUN chmod -R 777 /var/www/html
 
 # Crear las carpetas necesarias y asignar permisos
-RUN sudo mkdir -p /var/www/html/sinfirmar /var/www/html/firmados && sudo chmod -R 777 /var/www/html/guardar_pdf.php
+RUN sudo mkdir -p /var/www/html/sinfirmar /var/www/html/firmados 
 
 # Crear archivo php.ini
 RUN cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini
