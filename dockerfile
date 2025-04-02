@@ -17,8 +17,8 @@ RUN chmod -R 777 /var/www/html
 RUN cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini
 
 # Cambiar configuraciones en php.ini
-RUN sed -i 's/^post_max_size = .*/post_max_size = 50M/' /usr/local/etc/php/php.ini && \
-    sed -i 's/^upload_max_filesize = .*/upload_max_filesize = 50M/' /usr/local/etc/php/php.ini
+RUN sed -i 's/^post_max_size = .*/post_max_size = 80M/' /usr/local/etc/php/php.ini && \
+    sed -i 's/^upload_max_filesize = .*/upload_max_filesize = 80M/' /usr/local/etc/php/php.ini
 
 # Comando de inicio del contenedor
 CMD ["apache2-foreground"]
