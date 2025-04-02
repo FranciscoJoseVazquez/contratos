@@ -131,6 +131,7 @@
   </form>
 
   <div id="pdfContent" class="pdf-content">
+    <img src="atalaya.jpg" alt="" style="width: 300px;">
     <h2>CONTRATO MARCO PARA LA PRESTACIÓN DE SERVICIOS DENTRO DEL PROYECTO MINERO RIOTINTO</h2>
     <p style="text-align: right;">
         <span id="pdfFecha">En Minas De Riotinto, a </span>
@@ -185,6 +186,8 @@
         document.getElementById('pdfNotaria').textContent = data.get('notaria');
         document.getElementById('pdfNotario').textContent = data.get('notario');
         document.getElementById('pdfProtocolo').textContent = data.get('protocolo');
+        localStorage.setItem("fechaContrato", data.get('fecha'));
+        localStorage.setItem("apoderado",data.get('apoderado'))
 
         const pdfContent = document.getElementById('pdfContent');
         pdfContent.style.display = "block";
