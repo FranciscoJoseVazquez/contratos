@@ -6,6 +6,7 @@
     <title>Firmar PDF</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.16.0/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <style>
         body {
             display: flex;
@@ -75,6 +76,8 @@
 
         async function signPDF() {
             let pdfPath = localStorage.getItem("ruta");
+            let fechaContrato = localStorage.getItem("fechaContrato") || "Fecha desconocida";
+            let apoderado = localStorage.getItem("apoderado") || "Nombre desconocido";
 
             if (!pdfPath) {
                 alert("No se ha guardado la ruta del PDF.");
@@ -90,16 +93,61 @@
                 const signatureImage = signatureCanvas.toDataURL("image/png");
                 const pngImage = await pdfDoc.embedPng(signatureImage);
 
-                // Dimensiones de una hoja A4 en puntos PDF (595 × 842)
-                pages.forEach(page => {
-                    const { width, height } = page.getSize(); // Obtiene dimensiones de la página
+                // Generar huella digital (hash SHA-256 del contenido del PDF)
+                let hash = CryptoJS.SHA256(CryptoJS.lib.WordArray.create(pdfBytes)).toString();
 
+                // Obtener la hora actual
+                let now = new Date();
+                let horaActual = now.toLocaleTimeString();
+
+                let textoFirma = `Documento firmado digitalmente el ${fechaContrato} a las ${horaActual} :: Huella digital única: ${hash}`;
+                let textoFirma2 = `Documento firmado digitalmente el ${fechaContrato} a las ${horaActual}\nHuella digital única: ${hash}`;
+
+                pages.forEach(page => {
+                    const { width, height } = page.getSize();
+
+                    // Firma en la esquina inferior derecha
                     page.drawImage(pngImage, {
-                        x: width - 170, // Posición en la esquina inferior derecha
-                        y: 20, // Un poco por encima del borde inferior
+                        x: width - 170,
+                        y: 50,
                         width: 150,
                         height: 50
                     });
+
+                    // Texto de firma debajo de la imagen 
+                    page.drawText(textoFirma, {
+                        x: width - 575,
+                        y: 30,
+                        size: 8
+                    });
+                });
+
+                // Crear una nueva página con la firma grande en el centro
+                const newPage = pdfDoc.addPage([595, 842]);
+                const { width, height } = newPage.getSize();
+                
+                // Encabezado en la página extra
+                let textoEncabezado = `DOCUMENTO FIRMADO con fecha de ${fechaContrato}\nD./DÑA. ${apoderado} reconoce haber recibido el presente documento\n\nPara que así conste:`;
+
+                newPage.drawText(textoEncabezado, {
+                    x: 40,
+                    y: height - 100,
+                    size: 14
+                });
+
+                // Firma grande en el centro de la nueva página
+                newPage.drawImage(pngImage, {
+                    x: (width - 300) / 2, 
+                    y: (height / 4) * 2.3,
+                    width: 300,
+                    height: 150
+                });
+
+                // Texto de firma en la nueva página (tamaño más grande)
+                newPage.drawText(textoFirma2, {
+                    x: 50,
+                    y: 450,
+                    size: 9
                 });
 
                 const signedPdfBytes = await pdfDoc.save();
